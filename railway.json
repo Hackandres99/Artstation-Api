@@ -1,9 +1,10 @@
 {
-    "build": {
-      "command": "pip install -r requirements.txt"
-    },
-    "start": {
-      "command": "gunicorn entrypoint:app"
-    }
+  "build": {
+    "command": "pip install -r requirements.txt"
+  },
+  "start": {
+    "command": "python run.py"
   }
+}
+
   
