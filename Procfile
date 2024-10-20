@@ -1,1 +1,1 @@
-web: waitress-serve --port=5000 entrypoint:app
+web: python -m gunicorn entrypoint:app
