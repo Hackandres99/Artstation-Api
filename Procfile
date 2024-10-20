@@ -1,1 +1,2 @@
-web: gunicorn entrypoint:app
+web: python entrypoint.py
+
