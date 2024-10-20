@@ -1,1 +1,1 @@
-web: python -m gunicorn entrypoint:app
+web: waitress-serve --port=$PORT entrypoint:app
