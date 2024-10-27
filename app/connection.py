@@ -6,14 +6,17 @@ from pymongo import MongoClient
 class ArtstationRepository:
     def __init__(self) -> None:
         load_dotenv()
-
-        username = os.getenv('MONGODB_USERNAME')
-        password = os.getenv('MONGODB_PASSWORD')
+        
+        type = os.getenv('MONGODB_TYPE')
         host = os.getenv('MONGODB_HOST')
+        if type == 'atlas':
+            username = os.getenv('MONGODB_USERNAME')
+            password = os.getenv('MONGODB_PASSWORD')
+            connection_string = f"mongodb+srv://{username}:{password}@{host}/"
+        else:
+            connection_string = f"mongodb://{host}"
         port = int(os.getenv('MONGODB_PORT', 27017))
         database = os.getenv('MONGODB_DATABASE')
-
-        connection_string = f"mongodb+srv://{username}:{password}@{host}/"
 
         self.client = MongoClient(connection_string, port=port)
         self.db = self.client[database]
@@ -30,6 +33,10 @@ class ArtstationRepository:
     def get_artwork(self, id: str):
         artwork = self.artwork_collection.find_one({'artwork_id': id})
         return artwork
+    
+    def get_artworks(self):
+        artworks = list(self.artwork_collection.find({}))
+        return artworks
 
     def get_previews(self):
         previews = list(self.preview_collection.find({}))
