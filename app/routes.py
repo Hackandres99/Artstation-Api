@@ -19,7 +19,6 @@ def get_artwork(id:str = None):
         comment['_id'] = str(comment['_id'])
         for nested in comment['nested']:
             nested['_id'] = str(nested['_id'])
-    print(artwork)
     return jsonify(artwork)
 
 @app.route('/previews')
@@ -30,6 +29,17 @@ def get_previews():
         preview['_id'] = str(preview['_id'])
     return jsonify(previews)
 
+@app.route('/artworks')
+def get_artworks():
+    repository = ArtstationRepository()
+    artworks = repository.get_artworks()
+    for artwork in artworks:
+        artwork['_id'] = str(artwork['_id'])
+        for comment in artwork['comments']:
+            comment['_id'] = str(comment['_id'])
+            for nested in comment['nested']:
+                nested['_id'] = str(nested['_id'])
+    return jsonify(artworks)
 
 
 
