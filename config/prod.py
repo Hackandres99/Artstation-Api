@@ -1,2 +1,2 @@
 from .default import *
-APP_ACCESS_URL = 'http://localhost:5173'
+APP_ACCESS_URL = 'https://oniric-studio.vercel.app/'
